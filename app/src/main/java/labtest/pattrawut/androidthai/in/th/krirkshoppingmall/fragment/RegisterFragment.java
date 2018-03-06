@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import labtest.pattrawut.androidthai.in.th.krirkshoppingmall.MainActivity;
 import labtest.pattrawut.androidthai.in.th.krirkshoppingmall.R;
@@ -19,6 +20,9 @@ import labtest.pattrawut.androidthai.in.th.krirkshoppingmall.R;
  */
 
 public class RegisterFragment extends Fragment {
+
+//    Explier
+    private String nameString, userString, passwordString, modeString;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -41,7 +45,17 @@ public class RegisterFragment extends Fragment {
     }
 
     private void uploadtoServer() {
-    }
+
+//        Get Value From Edittext
+        EditText nameEditText = getView().findViewById(R.id.edtName);
+        EditText userEditText = getView().findViewById(R.id.edtUser);
+        EditText passwordEditText = getView().findViewById(R.id.edtPassword);
+
+        nameString = nameEditText.getText().toString().trim();
+        userString = userEditText.getText().toString().trim();
+        passwordString = passwordEditText.getText().toString().trim();
+
+    }   // uploadtoServer
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
