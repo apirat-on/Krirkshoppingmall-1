@@ -55,6 +55,13 @@ public class RegisterFragment extends Fragment {
         userString = userEditText.getText().toString().trim();
         passwordString = passwordEditText.getText().toString().trim();
 
+//        Check Space
+        if (nameString.isEmpty() || userString.isEmpty() || passwordString.isEmpty()) {
+//            Have Space
+
+
+        }
+
     }   // uploadtoServer
 
     @Override
