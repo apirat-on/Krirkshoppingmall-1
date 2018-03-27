@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import labtest.pattrawut.androidthai.in.th.krirkshoppingmall.MainActivity;
 import labtest.pattrawut.androidthai.in.th.krirkshoppingmall.R;
+import labtest.pattrawut.androidthai.in.th.krirkshoppingmall.utility.AddNewUserToSarver;
 import labtest.pattrawut.androidthai.in.th.krirkshoppingmall.utility.MyAlert;
+import labtest.pattrawut.androidthai.in.th.krirkshoppingmall.utility.MyConstant;
 
 /**
  * Created by Pattrawut on 3/6/2018.
@@ -78,6 +82,7 @@ public class RegisterFragment extends Fragment {
         nameString = nameEditText.getText().toString().trim();
         userString = userEditText.getText().toString().trim();
         passwordString = passwordEditText.getText().toString().trim();
+        modeString = passwordEditText.getText().toString().trim();
 
 //        Check Space
         if (nameString.isEmpty() || userString.isEmpty() || passwordString.isEmpty()) {
@@ -92,7 +97,23 @@ public class RegisterFragment extends Fragment {
             myAlert.myDialog("Non Choose Mode", "Please Choose Mode");
         }else {
 //            Choose Mode OK
-        }
+            try {
+                MyConstant myConstant =new MyConstant();
+                AddNewUserToSarver addNewUserToSarver = new AddNewUserToSarver(getActivity());
+                addNewUserToSarver.execute(nameString, userString,
+                        passwordString, modeString, myConstant.getURLAddUserString());
+
+                String reslt = addNewUserToSarver.get();
+                if (Boolean.parseBoolean(reslt)) {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    Toast.makeText(getActivity(), "Press try Again Cannot Add User",
+                            Toast.LENGTH_LONG).show();
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }// if
 
     }   // uploadtoServer
 
